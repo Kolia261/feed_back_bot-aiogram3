@@ -25,6 +25,14 @@ async def edit_user(tg_id, name, number, username=None):
                                                                                    username=username))
         await session.commit()
 
+async def set_user_data(tg_id, new_user):
+    async with async_session() as session:
+        user = await session.execute(update(User).where(User.tg_id == tg_id).values(name=new_user.name,
+                                                                                    pulls=new_user.pulls,
+                                                                                    last_garant5=new_user.last_garant5,
+                                                                                    last_garant20=new_user.last_garant20,
+                                                                                    money=new_user.money))
+        await session.commit()
 
 async def add_ticket(text, tg_id):
     async with async_session() as session:
@@ -50,6 +58,10 @@ async def get_user(u_id):
         user = await session.scalar(select(User).where(User.id == u_id))
         return user
 
+async def get_user_by_tg_id(tg_id):
+    async with async_session() as session:
+        user = await session.scalar(select(User).where(User.tg_id == tg_id))
+        return user
 
 async def delete_ticket(ticket_id):
     async with async_session() as session:

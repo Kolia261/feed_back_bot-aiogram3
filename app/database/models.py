@@ -22,6 +22,10 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(30), nullable=True)
     number: Mapped[str] = mapped_column(String(20), nullable=True)
     username: Mapped[str] = mapped_column(String(30), nullable=True)
+    money: Mapped[int] = mapped_column(default=0)
+    pulls: Mapped[int] = mapped_column(default=0)
+    last_garant5: Mapped[int] = mapped_column(default=0)
+    last_garant20: Mapped[int] = mapped_column(default=0)
 
 
 class Ticket(Base):
